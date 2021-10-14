@@ -12,7 +12,7 @@ const handlebarSetup = exphbs({
 });
 
 const bodyParser = require('body-parser');
-const greetRoutes = require('./routes/greet-routes');
+const greetRoutes = require('./routes/routes');
 const app = express();
 
 app.engine('handlebars', handlebarSetup);

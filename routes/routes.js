@@ -1,6 +1,6 @@
 module.exports = function (pool) {
 
-    const greetFactory = require('../greetFactory');
+    const greetFactory = require('../greetings');
     const greeted = greetFactory(pool)
 
 
@@ -16,11 +16,10 @@ module.exports = function (pool) {
     }
 
     async function greetUser(req, res) {
-        greeted.clear()
         greeted.errors(req.body.enterName, req.body.languages, req)
         if (req.body.languages) {
             await greeted.countNames(req.body.enterName, req.body.languages),
-                greeted.greetMe(req.body.enterName, req.body.languages)
+                greeted.greetUser(req.body.enterName, req.body.languages)
         }
         res.redirect('/');
 
@@ -36,21 +35,20 @@ module.exports = function (pool) {
 
     async function countName(req, res) {
         var users = req.params.username
-        var newCount = await greeted.addCounter(users)
+        var counts = await greeted.nameCounter(users)
 
         res.render('counter', {
             name: users,
-            counter: newCount
+            counter: counts
         });
 
     }
 
     async function clearCount(req, res) {
-        greeted.clear()
+        greeted.clearMsg()
         await greeted.reset()
 
         res.redirect('/')
-
     }
 
     return {
