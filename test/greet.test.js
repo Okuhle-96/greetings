@@ -3,7 +3,7 @@ const pg = require("pg");
 const greetFactory = require('../greetings');
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://coderr:1996@localhost:5432/users_test';
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/users_test';
 
 const pool = new Pool({
     connectionString
