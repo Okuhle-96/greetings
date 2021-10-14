@@ -12,6 +12,7 @@ const pool = new Pool({
 describe('The basic database web app', function () {
 
     beforeEach(async function () {
+        console.log("******");
         await pool.query("delete from users;");
     });
     
