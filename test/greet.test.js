@@ -28,7 +28,7 @@ describe('The basic database web app', function () {
             'Salvatore', 'English'
         );
 
-        let count = await greet.namesList();
+        let count = await greet.names();
         assert.deepEqual([{ username: 'Kodwa' }, { username: 'Matt' }, { username: 'Salvatore' }], count);
     });
 
