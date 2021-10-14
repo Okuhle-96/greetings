@@ -1,0 +1,191 @@
+body {
+    font-family: helvetica;
+    margin: 10px;
+    width: 60%;
+    margin: auto;
+    color: #05445E;
+}
+
+.heading {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 10px solid #05445E;
+}
+
+.name {
+    display: block;
+    width: 80%;
+    float: left;
+    padding: 20px;
+   
+}
+
+.langCount {
+    width: 100%;
+   
+    display: flex;
+    height: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin: auto;
+}
+
+.radio {
+    width: 20%;
+}
+
+.align {
+    width: 80%;
+    height: 100px;
+}
+.left {
+ color: peru;
+ float: right;
+ font-size: 50px;
+ margin-top: -80px;
+   
+}
+.error {
+    font-weight: lighter;
+    color: red;
+    text-align: center;
+    font-size: 17px;
+  
+}
+.lame {
+    display: block;
+}
+.enterName {
+    width: 60%;
+    padding: 20px;
+    border-radius:0;
+    border: 1px solid #05445E;
+    float: right;
+
+}
+
+.greeted {
+    text-align: center;
+}
+.buttons {
+    display: flex;
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+}
+.radio {
+    height: 50px;
+}
+
+.buttons .getName{
+    padding: 20px;
+    width: 50%;
+    background-color: #05445E;
+    border: #05445E;
+    color: white;
+    margin-right: 20px;
+    float: left;
+}
+.buttons .clearCount{
+    padding: 20px;
+    width: 50%;
+    background-color: #05445E;
+    border: #05445E;
+    color: white;
+    float: right;
+}
+
+.output{
+    text-align: left;
+    width: 70%;
+    margin: auto; 
+    color: peru;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+
+@media (min-width:270px){
+.heading {
+    font-size: 30px;
+}
+.name {
+    margin-top: -50px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+    .error {
+        text-align: center;
+        margin-left: 20px;
+    }
+  
+    .greeted {
+        font-size: medium;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #05445E;
+        font-size: 25px;
+       text-align: center;
+    }
+    .greeted:hover {
+        color: peru;
+       
+    }
+    .radioLang{
+        display: block;
+    }
+    .langCount {
+        display: flex ;
+        width: 80%;
+        margin-top: 30px;
+        /* margin: auto; */
+
+    }
+  
+    .buttons {
+        display: block;
+        width: 100%;
+        
+    }
+    .buttons .getName{
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    .buttons .clearCount {
+        width: 90%;
+        margin-bottom: 20px;
+        float: left;
+
+    }
+    
+    
+}
+
+@media (max-width: 860px){
+    .langCount {
+        display: block;
+    }
+}
+
+@media (min-width: 860px)
+{
+    .radioLang{
+        display: flex;
+        width: 120%;
+        margin: auto;
+    }
+    .buttons {
+        display: flex;
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+   
+}
