@@ -5,11 +5,8 @@ node_js:
   env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
 
-node_js:  
-  - "8.9.4"
-
 before_script:
-  - psql -c 'create database  users_test;' -U postgres
+  - psql -c 'create database users_test;' -U postgres
   - psql -U postgres -d users_test -a -f users.test.sql
 
 services:
