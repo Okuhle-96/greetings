@@ -15,34 +15,18 @@ describe('The basic database web app', function () {
         await pool.query("delete from users;");
     });
 
-    it('should pass the database test', async function () {
-
-        let greet = greetFactory(pool);
-        await greet.addNames(
-            'Kodwa', 'English'
-        );
-        await greet.addNames(
-            'Matt', 'English'
-        );
-        await greet.addNames(
-            'Salvatore', 'English'
-        );
-
-        let count = await greet.names();
-        assert.deepEqual([{ username: 'Kodwa' }, { username: 'Matt' }, { username: 'Salvatore' }], count);
-    });
-
     it('should return the accurate count of names greeted', async function () {
 
         let greet = greetFactory(pool);
-        await greet.addNames(
-            'Kodwa', 'English'
+
+        await greet.countNames(
+            'Kodwa', 'isixhosa'
         );
-        await greet.addNames(
-            'Matt', 'English'
+        await greet.countNames(
+            'Matt', 'isixhosa'
         );
-        await greet.addNames(
-            'Salvatore', 'English'
+        await greet.countNames(
+            'Salvatore', 'isixhosa'
         );
 
 
@@ -50,34 +34,35 @@ describe('The basic database web app', function () {
         let count = await greet.select();
         assert.deepEqual(3, count);
     });
-    it('should not count duplicate names', async function () {
+    it('Should count a name one even its greeted in a different language', async function () {
 
         let greet = greetFactory(pool);
-        await greet.addNames(
-            'Kodwa', 'English'
+        await greet.countNames(
+            'Kodwa', 'isixhosa'
         );
-        await greet.addNames(
-            'Kodwa', 'English'
+        await greet.countNames(
+            'Kodwa', 'sesotho'
         );
-        await greet.addNames(
-            'Kodwa', 'English'
+        await greet.countNames(
+            'Kodwa', 'sesotho'
         );
 
 
         let count = await greet.select();
         assert.deepEqual(1, count);
     });
-    it('should not include non-alphabetic characters', async function () {
+    it('Should only take alphabets when greeting a user', async function () {
 
         let greet = greetFactory(pool);
-        await greet.addNames(
-            'Kamva', 'English'
+
+        await greet.countNames(
+            'Kamva', 'isixhosa'
         );
-        await greet.addNames(
-            '123', 'English'
+        await greet.countNames(
+            '123', 'isixhosa'
         );
-        await greet.addNames(
-            '!@#$%', 'English'
+        await greet.countNames(
+            '!@#$%', 'isixhosa'
         );
 
         let count = await greet.select();

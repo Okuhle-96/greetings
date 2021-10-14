@@ -19,7 +19,7 @@ module.exports = function (pool) {
         greeted.clear()
         greeted.errors(req.body.enterName, req.body.languages, req)
         if (req.body.languages) {
-            await greeted.addNames(req.body.enterName, req.body.languages),
+            await greeted.countNames(req.body.enterName, req.body.languages),
                 greeted.greetMe(req.body.enterName, req.body.languages)
         }
         res.redirect('/');

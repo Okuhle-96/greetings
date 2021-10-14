@@ -18,7 +18,7 @@ module.exports = function (pool) {
         return greetMessage;
     }
 
-    async function addNames(name, language) {
+    async function countNames(name, language) {
         var upperName = name[0].toUpperCase() + name.slice(1).toLowerCase()
         if (regex.test(upperName) && language) {
             var checkname = await pool.query(`SELECT username from users WHERE username = $1`, [upperName]);
@@ -35,17 +35,18 @@ module.exports = function (pool) {
         }
     }
     function greetMe(name, language) {
+
         var upperName = name[0].toUpperCase() + name.slice(1).toLowerCase()
         
-            if (language === "English" && regex.test(upperName)) {
+            if (language === "isixhosa" && regex.test(upperName)) {
 
                 greetMessage = "Mholo, " + upperName
             }
-            else if (language === "Swedish" && regex.test(upperName)) {
+            else if (language === "xitsonga" && regex.test(upperName)) {
 
                 greetMessage = "Ahee, " + upperName
             }
-            else if (language === "Dutch" && regex.test(upperName)) {
+            else if (language === "sesotho" && regex.test(upperName)) {
 
                 greetMessage = "Dumelang, " + upperName
 
@@ -101,7 +102,7 @@ module.exports = function (pool) {
     return {
         select,
         returnMessage,
-        addNames,
+        countNames,
         clear,
         errors,
         greetMe,
