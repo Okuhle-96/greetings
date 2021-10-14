@@ -1,9 +1,13 @@
 language: node_js
-node_js:
-  - 12
 
   env:
-  - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
+
+    - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
+
+  
+  node_js:
+   - 12.22.1
+
 
 before_script:
   - psql -c 'create database users_test;' -U postgres
