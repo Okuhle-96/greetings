@@ -1,6 +1,7 @@
 language: node_js
 
-node_js: -12.22.7
+node_js: 
+  - "12"
 
 env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
@@ -11,8 +12,4 @@ before_script:
 
 services:
   - postgresql
-addons:
-  postgresql: "9.4"
-  apt:
-    packages:
-      - postgresql-server-dev-9.4
+
