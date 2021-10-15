@@ -1,6 +1,6 @@
 language: node_js
 
-node_js: -12
+node_js: -12.22.7
 
 env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
