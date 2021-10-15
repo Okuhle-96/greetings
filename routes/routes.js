@@ -21,12 +21,16 @@ module.exports = function (pool) {
     res.redirect("/");
   }
 
-  async function namesGreeted(req, res) {
-    var names = await greeted.names();
+  async function namesGreeted(req, res, next) {
+    try {
+      var names = await greeted.names();
 
-    res.render("greeted", {
-      nameCount: names,
-    });
+      res.render("greeted", {
+        nameCount: names,
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async function countName(req, res) {
