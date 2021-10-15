@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
   session({
-    secret: "Please Enter Your Name",
+    secret: "<add a secret string here>",
     resave: false,
     saveUninitialized: true,
   })
