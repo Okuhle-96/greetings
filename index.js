@@ -35,12 +35,12 @@ if (process.env.DATABASE_URL && !local) {
   useSSL = true;
 }
 
+const connectionString = process.env.DATABASE_URL ||
+"postgresql://coderr:1996@localhost:5432/my_database",
+
 const pool = new Pool({
-  connectionString:
-    process.env.DATABASE_URL ||
-    "postgresql://coderr:1996@localhost:5432/my_database",
+   connectionString,
   ssl: {
-    useSSL,
     rejectUnauthorized: false,
   },
 });
