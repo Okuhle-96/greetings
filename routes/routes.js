@@ -3,18 +3,17 @@ module.exports = function (pool) {
   const greeted = greetFactory(pool);
 
   async function home(req, res, next) {
-    try{
+    try {
       var home = await greeted.select();
       var message = greeted.returnMessage();
-  
+
       res.render("index", {
         greet: message,
         count: home,
       });
     } catch (err) {
-      next(err)
+      next(err);
     }
-  
   }
 
   async function greetUser(req, res, next) {
@@ -26,9 +25,8 @@ module.exports = function (pool) {
       }
       res.redirect("/");
     } catch (err) {
-      next(err)
+      next(err);
     }
-   
   }
 
   async function namesGreeted(req, res, next) {
@@ -44,28 +42,28 @@ module.exports = function (pool) {
   }
 
   async function countName(req, res, next) {
-   try {
-    var users = req.params.username;
-    var counts = await greeted.nameCounter(users);
+    try {
+      var users = req.params.username;
+      var counts = await greeted.nameCounter(users);
 
-    res.render("counter", {
-      name: users,
-      counter: counts,
-    });
-   } catch (err) {
-     next(err)
-   }
+      res.render("counter", {
+        name: users,
+        counter: counts,
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 
   async function clearCount(req, res, next) {
-   try {
-    greeted.clearMsg();
-    await greeted.reset();
+    try {
+      greeted.clearMsg();
+      await greeted.reset();
 
-    res.redirect("/");
-   } catch {
-     next(err)
-   }
+      res.redirect("/");
+    } catch {
+      next(err);
+    }
   }
 
   return {
