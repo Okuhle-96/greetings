@@ -1,63 +1,56 @@
 module.exports = function (pool) {
+  const greetFactory = require("../greetings");
+  const greeted = greetFactory(pool);
 
-    const greetFactory = require('../greetings');
-    const greeted = greetFactory(pool)
+  async function home(req, res) {
+    var home = await greeted.select();
+    var message = greeted.returnMessage();
 
+    res.render("index", {
+      greet: message,
+      count: home,
+    });
+  }
 
-    async function home(req, res) {
-        var home = await greeted.select()
-        var message = greeted.returnMessage()
-
-        res.render('index', {
-            greet: message,
-            count: home
-        });
-
+  async function greetUser(req, res) {
+    greeted.errors(req.body.enterName, req.body.languages, req);
+    if (req.body.languages) {
+      await greeted.countNames(req.body.enterName, req.body.languages),
+        greeted.greetUser(req.body.enterName, req.body.languages);
     }
+    res.redirect("/");
+  }
 
-    async function greetUser(req, res) {
-        greeted.errors(req.body.enterName, req.body.languages, req)
-        if (req.body.languages) {
-            await greeted.countNames(req.body.enterName, req.body.languages),
-                greeted.greetUser(req.body.enterName, req.body.languages)
-        }
-        res.redirect('/');
+  async function namesGreeted(req, res) {
+    var names = await greeted.names();
 
-    }
+    res.render("greeted", {
+      nameCount: names,
+    });
+  }
 
-    async function namesGreeted(req, res) {
-        var names = await greeted.names()
+  async function countName(req, res) {
+    var users = req.params.username;
+    var counts = await greeted.nameCounter(users);
 
-        res.render('greeted', {
-            nameCount: names
-        });
-    }
+    res.render("counter", {
+      name: users,
+      counter: counts,
+    });
+  }
 
-    async function countName(req, res) {
-        var users = req.params.username
-        var counts = await greeted.nameCounter(users)
+  async function clearCount(req, res) {
+    greeted.clearMsg();
+    await greeted.reset();
 
-        res.render('counter', {
-            name: users,
-            counter: counts
-        });
+    res.redirect("/");
+  }
 
-    }
-
-    async function clearCount(req, res) {
-        greeted.clearMsg()
-        await greeted.reset()
-
-        res.redirect('/')
-    }
-
-    return {
-        home,
-        greetUser,
-        namesGreeted,
-        countName,
-        clearCount
-    }
-
-
-}
+  return {
+    home,
+    greetUser,
+    namesGreeted,
+    countName,
+    clearCount,
+  };
+};

@@ -1,315 +1,326 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/cssgrid.css">
-    <title>Names Greeted</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/cssgrid.css" />
+  <title>Names Greeted</title>
 </head>
 <style>
-    @import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
+  @import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
 
-/* UNIVERSAL */
+  /* UNIVERSAL */
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding:
+      0;
+    left: 0;
+    top: 0;
+    font-size: 100%;
+  }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  left: 0;
-  top: 0;
-  font-size: 100%;
-}
+  /* ROOT FONT STYLES */
+  * {
+    font-family: 'Lato', Helvetica, sans-serif;
+    color: #333447;
+    line-height:
+      1.5;
+  }
 
-/* ROOT FONT STYLES */
+  /* TYPOGRAPHY */
+  h1 {
+    font-size: 2.5rem;
+  }
 
-* {
-  font-family: 'Lato', Helvetica, sans-serif;
-  color: #333447;
-  line-height: 1.5;
-}
+  h2 {
+    font-size: 2rem;
+  }
 
-/* TYPOGRAPHY */
+  h3 {
+    font-size: 1.375rem;
+  }
 
-h1 {
-  font-size: 2.5rem;
-}
+  h4 {
+    font-size: 1.125rem;
+  }
 
-h2 {
-  font-size: 2rem;
-}
+  h5 {
+    font-size: 1rem;
+  }
 
-h3 {
-  font-size: 1.375rem;
-}
+  h6 {
+    font-size: 0.875rem;
+  }
 
-h4 {
-  font-size: 1.125rem;
-}
+  p {
+    font-size: 1.125rem;
+    font-weight: 200;
+    line-height: 1.8;
+  }
 
-h5 {
-  font-size: 1rem;
-}
+  .font-light {
+    font-weight: 300;
+  }
 
-h6 {
-  font-size: 0.875rem;
-}
+  .font-regular {
+    font-weight: 400;
+  }
 
-p {
-  font-size: 1.125rem;
-  font-weight: 200;
-  line-height: 1.8;
-}
+  .font-heavy {
+    font-weight: 700;
+  }
 
-.font-light {
-  font-weight: 300;
-}
+  /* POSITIONING */
+  .left {
+    text-align: left;
+  }
 
-.font-regular {
-  font-weight: 400;
-}
+  .right {
+    text-align: right;
+  }
 
-.font-heavy {
-  font-weight: 700;
-}
+  .center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-/* POSITIONING */
+  .justify {
+    text-align: justify;
+  }
 
-.left {
-  text-align: left;
-}
-
-.right {
-  text-align: right;
-}
-
-.center {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.justify {
-  text-align: justify;
-}
-
-/* ==== GRID SYSTEM ==== */
-
-.container {
-  width: 90%;
-  margin: auto;
-}
-
-.row {
-  position: relative;
-  width: 100%;
-}
-
-.row [class^="col"] {
-  float: left;
-  margin: 0.5rem 2%;
-  min-height: 0.125rem;
-}
-
-.col-1,
-.col-2,
-.col-3,
-.col-4,
-.col-5,
-.col-6,
-.col-7,
-.col-8,
-.col-9,
-.col-10,
-.col-11,
-.col-12 {
-  width: 96%;
-}
-
-.col-1-sm {
-  width: 4.33%;
-}
-
-.col-2-sm {
-  width: 12.66%;
-}
-
-.col-3-sm {
-  width: 21%;
-}
-
-.col-4-sm {
-  width: 29.33%;
-}
-
-.col-5-sm {
-  width: 37.66%;
-}
-
-.col-6-sm {
-  width: 46%;
-}
-
-.col-7-sm {
-  width: 54.33%;
-}
-
-.col-8-sm {
-  width: 62.66%;
-}
-
-.col-9-sm {
-  width: 71%;
-}
-
-.col-10-sm {
-  width: 79.33%;
-}
-
-.col-11-sm {
-  width: 87.66%;
-}
-
-.col-12-sm {
-  width: 96%;
-}
-
-.row::after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-.hidden-sm {
-  display: none;
-}
-
-@media only screen and (min-width: 33.75em) {  /* 540px */
+  /* ==== GRID SYSTEM ==== */
   .container {
-    width: 80%;
-  }
-}
-
-@media only screen and (min-width: 45em) {  /* 720px */
-  .col-1 {
-    width: 4.33%;
+    width: 90%;
+    margin: auto;
   }
 
-  .col-2 {
-    width: 12.66%;
+  .row {
+    position: relative;
+    width: 100%;
   }
 
-  .col-3 {
-    width: 21%;
+  .row [class^="col"] {
+    float: left;
+    margin: 0.5rem 2%;
+    min-height: 0.125rem;
   }
 
-  .col-4 {
-    width: 29.33%;
-  }
-
-  .col-5 {
-    width: 37.66%;
-  }
-
-  .col-6 {
-    width: 46%;
-  }
-
-  .col-7 {
-    width: 54.33%;
-  }
-
-  .col-8 {
-    width: 62.66%;
-  }
-
-  .col-9 {
-    width: 71%;
-  }
-
-  .col-10 {
-    width: 79.33%;
-  }
-
-  .col-11 {
-    width: 87.66%;
-  }
-
+  .col-1,
+  .col-2,
+  .col-3,
+  .col-4,
+  .col-5,
+  .col-6,
+  .col-7,
+  .col-8,
+  .col-9,
+  .col-10,
+  .col-11,
   .col-12 {
     width: 96%;
   }
 
+  .col-1-sm {
+    width: 4.33%;
+  }
+
+  .col-2-sm {
+    width: 12.66%;
+  }
+
+  .col-3-sm {
+    width: 21%;
+  }
+
+  .col-4-sm {
+    width:
+      29.33%;
+  }
+
+  .col-5-sm {
+    width: 37.66%;
+  }
+
+  .col-6-sm {
+    width: 46%;
+  }
+
+  .col-7-sm {
+    width: 54.33%;
+  }
+
+  .col-8-sm {
+    width: 62.66%;
+  }
+
+  .col-9-sm {
+    width: 71%;
+  }
+
+  .col-10-sm {
+    width: 79.33%;
+  }
+
+  .col-11-sm {
+    width: 87.66%;
+  }
+
+  .col-12-sm {
+    width: 96%;
+  }
+
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
   .hidden-sm {
-    display: block;
+    display: none;
   }
-}
 
-@media only screen and (min-width: 60em) { /* 960px */
-  .container {
-    width: 75%;
-    max-width: 60rem;
+  @media only screen and (min-width: 33.75em) {
+
+    /* 540px */
+    .container {
+      width: 80%;
+    }
   }
-}
 
-.header {
+  @media only screen and (min-width: 45em) {
+
+    /* 720px */
+    .col-1 {
+      width: 4.33%;
+    }
+
+    .col-2 {
+      width: 12.66%;
+    }
+
+    .col-3 {
+      width: 21%;
+    }
+
+    .col-4 {
+      width: 29.33%;
+    }
+
+    .col-5 {
+      width: 37.66%;
+    }
+
+    .col-6 {
+      width: 46%;
+    }
+
+    .col-7 {
+      width: 54.33%;
+    }
+
+    .col-8 {
+      width: 62.66%;
+    }
+
+    .col-9 {
+      width: 71%;
+    }
+
+    .col-10 {
+      width: 79.33%;
+    }
+
+    .col-11 {
+      width: 87.66%;
+    }
+
+    .col-12 {
+      width: 96%;
+    }
+
+    .hidden-sm {
+      display: block;
+    }
+  }
+
+  @media only screen and (min-width: 60em) {
+
+    /* 960px */
+    .container {
+      width: 75%;
+      max-width:
+        60rem;
+    }
+  }
+
+  .header {
     width: 40%;
     margin: auto;
-}
+  }
 
-.header h1{
-    font-weight: bolder;
+  .header h1 {
+    font-weight:
+      bolder;
     margin-top: 50px;
     margin-bottom: 30px;
     padding: 20px;
     border: 7px solid #333447;
-}
+  }
 
-.button {
+  .button {
     width: 10%;
     margin: auto;
-}
+  }
 
-.button a {
+  .button a {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 70px;
-    padding-right: 70px;
+    padding-right:
+      70px;
     background-color: #333447;
     color: white;
     margin: 20px;
     text-decoration: none;
     width: 200px;
     text-align: center;
-}
+  }
 
-.nameCount {
+  .nameCount {
     margin-bottom: 50px;
-}
+  }
 
-.nameCount a {
+  .nameCount a {
     font-weight: bolder;
-    text-decoration: none;
+    text-decoration:
+      none;
     font-size: 1.125rem;
     list-style: none;
-}
+  }
 </style>
-<body>   
-<div class="header center">
+
+<body>
+  <div class="header center">
     <h1>Names Greeted List</h1>
-    </div>
+  </div>
 
-<div class="nameCount center">
+  <div class="nameCount center">
     {{#each nameCount}}
-    <a href="/counter/{{username}}"><ul>{{username}}</ul></a>
+    <a href="/counter/{{username}}">
+      <ul>{{username}}</ul>
+    </a>
     {{/each}}
-</div>
+  </div>
 
-<div class="button">
-      <a href="/">Home</a>
-</div>
+  <div class="button">
+    <a href="/">Home</a>
+  </div>
 </body>
+
 </html>
