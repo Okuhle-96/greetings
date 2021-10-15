@@ -6,7 +6,6 @@ env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
 
 before_script:
-  - nvm install
   - psql -c 'create database users_test;' -U postgres
   - psql -U postgres -d users_test -a -f users.sql
 
