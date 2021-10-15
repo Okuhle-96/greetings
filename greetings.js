@@ -62,7 +62,7 @@ module.exports = function (pool) {
     if (!name && !language) {
       req.flash("info", "Please enter your name and select your language!");
     } else if (name && !language) {
-      req.flash("info", "Please select your language!");
+      req.flash("info", "Please select youur language!");
     } else if (!name || !regex.test(name)) {
       req.flash("info", "Please enter a valid name, eg Mark");
     }
