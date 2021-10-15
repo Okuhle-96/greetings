@@ -2,23 +2,33 @@ module.exports = function (pool) {
   const greetFactory = require("../greetings");
   const greeted = greetFactory(pool);
 
-  async function home(req, res) {
-    var home = await greeted.select();
-    var message = greeted.returnMessage();
-
-    res.render("index", {
-      greet: message,
-      count: home,
-    });
+  async function home(req, res, next) {
+    try{
+      var home = await greeted.select();
+      var message = greeted.returnMessage();
+  
+      res.render("index", {
+        greet: message,
+        count: home,
+      });
+    } catch (err) {
+      next(err)
+    }
+  
   }
 
-  async function greetUser(req, res) {
-    greeted.errors(req.body.enterName, req.body.languages, req);
-    if (req.body.languages) {
-      await greeted.countNames(req.body.enterName, req.body.languages),
-        greeted.greetUser(req.body.enterName, req.body.languages);
+  async function greetUser(req, res, next) {
+    try {
+      greeted.errors(req.body.enterName, req.body.languages, req);
+      if (req.body.languages) {
+        await greeted.countNames(req.body.enterName, req.body.languages),
+          greeted.greetUser(req.body.enterName, req.body.languages);
+      }
+      res.redirect("/");
+    } catch (err) {
+      next(err)
     }
-    res.redirect("/");
+   
   }
 
   async function namesGreeted(req, res, next) {
@@ -33,7 +43,8 @@ module.exports = function (pool) {
     }
   }
 
-  async function countName(req, res) {
+  async function countName(req, res, next) {
+   try {
     var users = req.params.username;
     var counts = await greeted.nameCounter(users);
 
@@ -41,13 +52,20 @@ module.exports = function (pool) {
       name: users,
       counter: counts,
     });
+   } catch (err) {
+     next(err)
+   }
   }
 
-  async function clearCount(req, res) {
+  async function clearCount(req, res, next) {
+   try {
     greeted.clearMsg();
     await greeted.reset();
 
     res.redirect("/");
+   } catch {
+     next(err)
+   }
   }
 
   return {
