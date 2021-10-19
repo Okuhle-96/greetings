@@ -7,9 +7,15 @@ env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/users_test
 
 before_script:
+  - npm install
   - psql -c 'create database users_test;' -U postgres
   - psql -U postgres -d users_test -a -f users.sql
 
 services:
   - postgresql
+  addons:
+    postgresql: '9.4'
+    apt:
+      packages:
+        -postgresql-server-dev-9.4
 
