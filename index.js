@@ -23,7 +23,6 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const PORT = process.env.PORT || 3011;
 app.use(
   session({
     secret: "<add a secret string here>",
@@ -57,7 +56,7 @@ app.get("/greeted", greet.namesGreeted);
 app.get("/counter/:username", greet.countName);
 app.post("/reset", greet.clearCount);
 
-
+const PORT = process.env.PORT || 3011;
 
 app.listen(PORT, function () {
   console.log("App started at PORT : ", PORT);
