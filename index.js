@@ -20,8 +20,8 @@ app.engine("handlebars", handlebarSetup);
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "<add a secret string here>",
