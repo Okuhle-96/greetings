@@ -108,7 +108,6 @@ module.exports = function (pool) {
 
   async function reset() {
     var deleted = await pool.query("delete from users");
-    alert("dhgvhg");
     return deleted;
   }
 
