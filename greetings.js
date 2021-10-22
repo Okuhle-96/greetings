@@ -25,20 +25,23 @@ module.exports = function (pool) {
     }
   }
 
-  async function countNames(name, language) {
+  async function countNames(name) {
+    if (!name[0]) {
+      return;
+    }
+
     var nameToUpp = name[0].toUpperCase() + name.slice(1).toLowerCase();
-    if (regex.test(nameToUpp) && language) {
-      var checkname = await pool.query(
+    if (regex.test(nameToUpp)) {
+      var checknames = await pool.query(
         `SELECT username from users WHERE username = $1`,
         [nameToUpp]
       );
 
-      if (checkname.rowCount < 1) {
+      if (checknames.rowCount < 1) {
         await pool.query(
           `INSERT INTO users (username,counters) VALUES ($1,$2)`,
           [nameToUpp, 1]
-      );
-      
+        );
       } else {
         await pool.query(
           `UPDATE users SET counters = counters + 1 WHERE username = $1`,
@@ -48,24 +51,35 @@ module.exports = function (pool) {
     }
   }
 
-  async function errors(name, language, req) {
-    var nameToUpp = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  async function errors(nameInput, language, req) {
+    let errorMessage = "";
 
-    var checkname = await pool.query(
-      `SELECT username from users WHERE username = $1`,
-      [nameToUpp]
-    );
+    if (nameInput === "" && language === undefined) {
+      errorMessage = "Please enter your name and select your language!";
+    
+      console.log("Please enter your name and select your language!")
+      return true;
+    } else if (language === undefined) {
+      errorMessage = "Please select youur language!";
+      return true;
+    } else if (nameInput === "" && language ||  nameInput === undefined && language){
+      errorMessage = "Please enter your name";
+      return true;
+    } else if (!regex.test(nameInput)) {
+      errorMessage = "Please enter a valid name, eg Mark";
+      return true;
+    } else {
+      var checkname = await pool.query(
+        `SELECT username from users WHERE username = $1`,
+        [nameInput]
+      );
 
-    if (!checkname.rowCount < 1) {
-      req.flash("info", "You have already been greeted!");
+      if (!checkname.rowCount < 1) {
+        errorMessage = "You have already been greeted!";
+        return true;
+      }
     }
-    if (!name && !language) {
-      req.flash("info", "Please enter your name and select your language!");
-    } else if (name && !language) {
-      req.flash("info", "Please select youur language!");
-    } else if (!name || !regex.test(name)) {
-      req.flash("info", "Please enter a valid name, eg Mark");
-    }
+    req.flash("info");
   }
 
   function clearMsg() {
