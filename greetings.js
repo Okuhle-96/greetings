@@ -58,8 +58,9 @@ module.exports = function (pool) {
     if (nameInput === "" && language === undefined) {
       errorMessage = "Please enter your name and select your language!";
     
-      console.log("Please enter your name and select your language!")
+      // console.log("Please enter your name and select your language!")
       return true;
+      
     } else if (language === undefined) {
       errorMessage = "Please select youur language!";
       return true;
@@ -80,7 +81,7 @@ module.exports = function (pool) {
         return true;
       }
     }
-    req.flash("info");
+    return req.flash("info");
   }
 
   function clearMsg() {
@@ -107,6 +108,7 @@ module.exports = function (pool) {
 
   async function reset() {
     var deleted = await pool.query("delete from users");
+    alert("dhgvhg");
     return deleted;
   }
 
@@ -120,5 +122,5 @@ module.exports = function (pool) {
     names,
     nameCounter,
     reset,
-  };
-};
+  }
+}
