@@ -18,17 +18,11 @@ module.exports = function (pool) {
 
   async function greetUser(req, res, next) {
     try {
-      
-      
-      if (!greeted.errors(req.body.enterName, req.body.languages, req)) {
-
+      greeted.errors(req.body.enterName, req.body.languages, req);
+      if (req.body.languages) {
         await greeted.countNames(req.body.enterName, req.body.languages),
-          greeted.greetUser(req.body.enterName, req.body.languages);
+          greeted.greetUsers(req.body.enterName, req.body.languages);
       }
-
-      // if (req.body.enterName && req.body.languages) {
-      // }
-
       res.redirect("/");
     } catch (err) {
       next(err);

@@ -13,16 +13,18 @@ module.exports = function (pool) {
     return greetMessage;
   }
 
-  function greetUser(name, language) {
-    var nameToUpp = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  function greetUsers(name, language) {
+    // var nameToUpp = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
-    if (language === "isixhosa" && regex.test(nameToUpp)) {
-      console.log("ggfdgfdgfdgf")
-      greetMessage = "Mholo, " + nameToUpp;
-    } else if (language === "xitsonga" && regex.test(nameToUpp)) {
-      greetMessage = "Ahee, " + nameToUpp;
-    } else if (language === "sesotho" && regex.test(nameToUpp)) {
-      greetMessage = "Dumelang, " + nameToUpp;
+    if (language === "isixhosa" && regex.test(name)) {
+      console.log(name)
+      greetMessage = "Mholo, " + name;
+    } else if (language === "xitsonga" && regex.test(name)) {
+      console.log(name)
+      greetMessage = "Ahee, " + name;
+    } else if (language === "sesotho" && regex.test(name)) {
+      console.log(name)
+      greetMessage = "Dumelang, " + name;
     }
   }
 
@@ -53,22 +55,20 @@ module.exports = function (pool) {
   }
 
   async function errors(nameInput, language, req) {
-    let errorMessage = "";
 
     if (nameInput === "" && language === undefined) {
-      errorMessage = "Please enter your name and select your language!";
+      req.flash("info", "Please enter your name and select your language!");
     
-      // console.log("Please enter your name and select your language!")
       return true;
       
     } else if (language === undefined) {
-      errorMessage = "Please select youur language!";
+      req.flash("info", "Please select your language!");
       return true;
-    } else if (nameInput === "" && language ||  nameInput === undefined && language){
-      errorMessage = "Please enter your name";
+    } else if ((nameInput === "" && language )|| ( nameInput === undefined && language)){
+      req.flash("info", "Please enter your name");
       return true;
     } else if (!regex.test(nameInput)) {
-      errorMessage = "Please enter a valid name, eg Mark";
+      req.flash("info", "Please enter a valid name, eg Mark");
       return true;
     } else {
       var checkname = await pool.query(
@@ -77,7 +77,7 @@ module.exports = function (pool) {
       );
 
       if (!checkname.rowCount < 1) {
-        errorMessage = "You have already been greeted!";
+        req.flash("info", "You have already been greeted!");
         return true;
       }
     }
@@ -114,7 +114,7 @@ module.exports = function (pool) {
   return {
     select,
     returnMessage,
-    greetUser,
+    greetUsers,
     countNames,
     errors,
     clearMsg,

@@ -783,12 +783,10 @@ p {
       margin-top: -95px;
     }
 }
-
-
-
 </style>
 
 <body>
+  
     <div class="greetDiv">
         <div class="header center">
             <h1>Greetings</h1>
@@ -847,10 +845,20 @@ p {
                     </div>
 
                     <div class="greeted">
- <a href="/greeted" class="center" >Names Greeted</a>
+  <a href="/greeted" class="center" >Names Greeted</a>
                     </div>
             
         </div>
     </div>
+    <script>
+   
+    var message =  document.querySelector(".error").innerHTML;
+    
+    if(message)
+         setTimeout(function(){
+           message.innerHTML = "";
+        }, 1500);
+    } 
+</script>
 </body>
 </html>
