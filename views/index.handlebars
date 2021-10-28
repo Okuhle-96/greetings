@@ -794,7 +794,7 @@ p {
         </div>
         {{#if messages.info}}
         <div class="error">
-            <p class="center"> {{messages.info}}</p>
+            <p class="center errors"> {{messages.info}}</p>
         </div>
         {{/if}}
        
@@ -852,9 +852,10 @@ p {
     </div>
     <script>
    
-    var message =  document.querySelector(".error").innerHTML;
+    var message =  document.querySelector(".errors");
     
-    if(message)
+    if(message.innerHTML !== ""){
+
          setTimeout(function(){
            message.innerHTML = "";
         }, 1500);

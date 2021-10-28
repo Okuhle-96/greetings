@@ -19,7 +19,7 @@ describe("The basic database web app", function () {
   it("Should be able to greet a user in IsiXhosa", async function () {
     let testGreet = greetFactory(pool);
 
-    await testGreet.greetUser("Kodwa", "isixhosa");
+    await testGreet.greetUsers("Kodwa", "isixhosa");
 
     let greet = await testGreet.returnMessage();
     assert.deepEqual("Mholo, Kodwa", greet);
@@ -28,7 +28,7 @@ describe("The basic database web app", function () {
   it("Should be able to greet a user in XiTsonga", async function () {
     let testGreet = greetFactory(pool);
 
-    await testGreet.greetUser("Koko", "xitsonga");
+    await testGreet.greetUsers("Koko", "xitsonga");
 
     let greet = await testGreet.returnMessage();
     assert.deepEqual("Ahee, Koko", greet);
@@ -37,7 +37,7 @@ describe("The basic database web app", function () {
   it("Should be able to greet a user in SeSotho", async function () {
     let testGreet = greetFactory(pool);
 
-    await testGreet.greetUser("Kamva", "sesotho");
+    await testGreet.greetUsers("Kamva", "sesotho");
 
     let greet = await testGreet.returnMessage();
     assert.deepEqual("Dumelang, Kamva", greet);
@@ -50,7 +50,7 @@ describe("The basic database web app", function () {
     await testGreet.countNames("Matt", "isixhosa");
     await testGreet.countNames("Salvatore", "isixhosa");
 
-    let counter = await testGreet.select();
+    let counter = await testGreet.selectNames();
     assert.deepEqual(3, counter);
   });
 
@@ -60,7 +60,7 @@ describe("The basic database web app", function () {
     await testGreet.countNames("kodwa", "sesotho");
     await testGreet.countNames("Kodwa", "sesotho");
 
-    let counter = await testGreet.select();
+    let counter = await testGreet.selectNames();
     assert.deepEqual(1, counter);
   });
 
@@ -85,8 +85,19 @@ describe("The basic database web app", function () {
     await testGreet.countNames("45679", "isixhosa");
     await testGreet.countNames("!@@#$%%^", "isixhosa");
 
-    let counter = await testGreet.select();
+    let counter = await testGreet.selectNames();
     assert.equal(1, counter);
+  });
+
+  it("Should be able to show an error", async function () {
+    let testGreet = greetFactory(pool);
+
+    await testGreet.greetUsers("Okuhle", "isixhosa");
+    await testGreet.greetUsers("Okuhle", "sesotho");
+    await testGreet.greetUsers("Kamva", "isixhosa");
+
+    let resetCounter = await testGreet.reset();
+    assert(0, resetCounter);
   });
 
   after(function () {

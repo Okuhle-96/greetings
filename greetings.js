@@ -2,7 +2,7 @@ module.exports = function (pool) {
   var regex = /^[a-zA-Z]+$/;
   var greetMessage;
 
-  async function select() {
+  async function selectNames() {
     var users = await pool.query("select * from users");
     const selectedUsers = users.rowCount;
 
@@ -17,13 +17,10 @@ module.exports = function (pool) {
     // var nameToUpp = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
     if (language === "isixhosa" && regex.test(name)) {
-      console.log(name)
       greetMessage = "Mholo, " + name;
     } else if (language === "xitsonga" && regex.test(name)) {
-      console.log(name)
       greetMessage = "Ahee, " + name;
     } else if (language === "sesotho" && regex.test(name)) {
-      console.log(name)
       greetMessage = "Dumelang, " + name;
     }
   }
@@ -112,7 +109,7 @@ module.exports = function (pool) {
   }
 
   return {
-    select,
+    selectNames,
     returnMessage,
     greetUsers,
     countNames,
