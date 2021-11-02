@@ -9,3 +9,6 @@ env:
 before_script:
   - psql -c 'create database users_test;' -U postgres
   - psql -U postgres -d users_test -a -f users.sql
+
+services:
+  - postgresql
