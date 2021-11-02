@@ -403,8 +403,16 @@ p {
   }
 
   .count {
-    margin-top: -100px;
+    {{!-- margin-top: -100px; --}}
   }
+.greet {
+  margin-left: 70px;
+}
+
+.clear {
+  margin-left: 70px;
+  margin-top: 5px;
+}
 
 .greeted {
   width: 180px;
@@ -629,6 +637,38 @@ p {
     }
 
     .name-tag {
+      margin-left: 240px;
+    }
+
+    .koko {
+      display: flex;
+    }
+
+    .radioLang {
+      margin-left: 240px;
+    }
+
+    .greet {
+      margin-left: 200px;
+    }
+
+    .clear {
+
+      margin-left: 200px;
+    }
+
+    .greeted {
+      width: 200px;
+    }
+  }
+
+   @media (min-width: 667px) {
+  .header{
+      width: 65%;
+     
+    }
+
+    .name-tag {
       margin-left: 150px;
     }
 
@@ -642,6 +682,7 @@ p {
 
     .greet {
       margin-left: 120px;
+      {{!-- width: 270px; --}}
     }
 
     .clear {
@@ -742,7 +783,13 @@ p {
       margin-right: 20px;
     }
 
+    .greet {
+      margin-left: 350px;
+    }
 
+    .clear {
+      margin-left: 520px;
+    }
 
     .greeted {
       width: 200px;

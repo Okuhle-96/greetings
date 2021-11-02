@@ -78,7 +78,7 @@ describe("The basic database web app", function () {
     );
   });
 
-  it("Should only take alphabets when greeting a user", async function () {
+  it("Should only take and count alphabets when greeting a user", async function () {
     let testGreet = greetFactory(pool);
 
     await testGreet.countNames("Kamva", "isixhosa");
@@ -89,15 +89,14 @@ describe("The basic database web app", function () {
     assert.equal(1, counter);
   });
 
-  it("Should be able to show an error", async function () {
+  it("Should be able to clear messages after greeting", async function () {
     let testGreet = greetFactory(pool);
 
     await testGreet.greetUsers("Okuhle", "isixhosa");
     await testGreet.greetUsers("Okuhle", "sesotho");
-    await testGreet.greetUsers("Kamva", "isixhosa");
-
-    let resetCounter = await testGreet.reset();
-    assert(0, resetCounter);
+   
+    let clearMsgs = await testGreet.clearMsg();
+    assert.equal(undefined, clearMsgs);
   });
 
   after(function () {
