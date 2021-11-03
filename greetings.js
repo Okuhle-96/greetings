@@ -2,11 +2,11 @@ module.exports = function (pool) {
   var regex = /^[a-zA-Z]+$/;
   var greetMessage;
 
-  async function selectNames() {
+  async function userCount() {
     var users = await pool.query("select * from users");
-    const selectedUsers = users.rowCount;
+    const count = users.rowCount;
 
-    return selectedUsers;
+    return count;
   }
 
   function returnMessage() {
@@ -109,7 +109,7 @@ module.exports = function (pool) {
   }
 
   return {
-    selectNames,
+    userCount,
     returnMessage,
     greetUsers,
     countNames,

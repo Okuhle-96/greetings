@@ -4,7 +4,7 @@ module.exports = function (pool) {
 
   async function home(req, res, next) {
     try {
-      var home = await greeted.selectNames();
+      var home = await greeted.userCount();
       var message = greeted.returnMessage();
 
       res.render("index", {

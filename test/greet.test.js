@@ -46,30 +46,30 @@ describe("The basic database web app", function () {
   it("Should count the number of people greeted", async function () {
     let testGreet = greetFactory(pool);
 
-    await testGreet.countNames("Kodwa", "isixhosa");
-    await testGreet.countNames("Matt", "isixhosa");
-    await testGreet.countNames("Salvatore", "isixhosa");
+    await testGreet.countNames("Kodwa");
+    await testGreet.countNames("Matt");
+    await testGreet.countNames("Salvatore");
 
-    let counter = await testGreet.selectNames();
+    let counter = await testGreet.userCount();
     assert.deepEqual(3, counter);
   });
 
   it("Should count a name once even its greeted in a different language", async function () {
     let testGreet = greetFactory(pool);
-    await testGreet.countNames("Kodwa", "isixhosa");
-    await testGreet.countNames("kodwa", "sesotho");
-    await testGreet.countNames("Kodwa", "sesotho");
+    await testGreet.countNames("Kodwa");
+    await testGreet.countNames("kodwa");
+    await testGreet.countNames("Kodwa");
 
-    let counter = await testGreet.selectNames();
+    let counter = await testGreet.userCount();
     assert.deepEqual(1, counter);
   });
 
   it("Should be able to display the names greeted", async function () {
     let testGreet = greetFactory(pool);
 
-    await testGreet.countNames("Kodwa", "isixhosa");
-    await testGreet.countNames("Matt", "isixhosa");
-    await testGreet.countNames("Salvatore", "isixhosa");
+    await testGreet.countNames("Kodwa");
+    await testGreet.countNames("Matt");
+    await testGreet.countNames("Salvatore");
 
     let namesGreeted = await testGreet.names();
     assert.deepEqual(
@@ -81,11 +81,11 @@ describe("The basic database web app", function () {
   it("Should only take and count alphabets when greeting a user", async function () {
     let testGreet = greetFactory(pool);
 
-    await testGreet.countNames("Kamva", "isixhosa");
-    await testGreet.countNames("45679", "isixhosa");
-    await testGreet.countNames("!@@#$%%^", "isixhosa");
+    await testGreet.countNames("Kamva");
+    await testGreet.countNames("45679");
+    await testGreet.countNames("!@@#$%%^");
 
-    let counter = await testGreet.selectNames();
+    let counter = await testGreet.userCount();
     assert.equal(1, counter);
   });
 
